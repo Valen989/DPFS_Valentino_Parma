@@ -12,21 +12,30 @@ app.get('/',(req,res) => {
     res.sendFile(path.join(__dirname,'./views/home.html'))
 })
 
-app.get('/carrito',(req,res) => {
-    res.sendFile(path.join(__dirname,'./views/carrito.html'))
+app.get('/cart',(req,res) => {
+    res.sendFile(path.join(__dirname,'./views/cart.html'))
 })
 
 app.get('/login',(req,res) => {
     res.sendFile(path.join(__dirname,'./views/login.html'))
 })
 
-app.get('/productos',(req,res) => {
+app.get('/products',(req,res) => {
     res.sendFile(path.join(__dirname,'./views/productos.html'))
 })
 
-app.get('/registrarse',(req,res) => {
+app.get('/register',(req,res) => {
     res.sendFile(path.join(__dirname,'./views/register.html'))
 })
+
+app.get('/about',(req,res) => {
+    res.sendFile(path.join(__dirname,'./views/about.html'))
+})
+
+app.get('/contact',(req,res) => {
+    res.sendFile(path.join(__dirname,'./views/contact.html'))
+})
+
 
 app.listen(3030,() =>
 console.log('servidor corriendo en http://localhost:' + PORT))
