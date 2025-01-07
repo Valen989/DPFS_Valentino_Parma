@@ -21,7 +21,7 @@ app.get('/login',(req,res) => {
 })
 
 app.get('/products',(req,res) => {
-    res.sendFile(path.join(__dirname,'./views/productos.html'))
+    res.sendFile(path.join(__dirname,'./views/products.html'))
 })
 
 app.get('/register',(req,res) => {
