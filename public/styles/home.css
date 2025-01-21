@@ -8,3 +8,18 @@
     margin-left: 40%;
 }
 
+.carrusel img{
+    width: 20%;
+    height: 20%;
+}
+
+.productos-destacados img{
+    width: 20%;
+    height: 20%;
+}
+
+
+.redes-sociales{
+    justify-content: center;
+    
+}
