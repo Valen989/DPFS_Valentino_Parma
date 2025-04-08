@@ -11,7 +11,7 @@ module.exports = {
         const prodFound = products.find((product)=>product.id == req.params.id)
         
         if (prodFound) {
-            res.render("products/detail",{prodFound })
+            res.render("products/detail",{prodFound})
         }
     },
     create:(req,res) =>{
@@ -48,7 +48,9 @@ module.exports = {
         res.redirect("/")
     },  
     list : (req,res) =>{
-    
+        const products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
+        
+         res.render('products',{products});
     },
     edit: (req, res) => {
         let products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
