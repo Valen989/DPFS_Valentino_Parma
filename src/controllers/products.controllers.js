@@ -10,27 +10,78 @@ module.exports = {
 
         const prodFound = products.find((product)=>product.id == req.params.id)
         
-        res.render("products/detail",{prodFound })
+        if (prodFound) {
+            res.render("products/detail",{prodFound })
+        }
     },
     create: (req,res) =>{
         const products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
 
+        const {
+            name,
+            color,
+            decorado,
+            color_decorado,
+            iamge,
+            price,
+
+        } = req.body
+
         let newProduct = {
         id: products[products.length - 1].id +1 ,
-        name: req.body.nombre,
-        color: req.body.color,
-        decorado: req.body.decorado,
-        color_decorado : req.body.color_decorado,
-        image: req.body.imagen,
-        price: req.body.precio
-        
+        name,
+        color,
+        decorado,
+        color_decorado ,
+        image ,
+        price,
+
         }
         products.push(newProduct)
-    },
+
+        fs.writeFileSync(productsPath,JSON.stringify(products, null, " "))
+
+        res.redirect("/")
+    },  
     list : (req,res) =>{
     
     },
-    edit: (req,res) =>{
+    edit: (req, res) => {
+        let products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
+        let prodFound = products.find((prod) => prod.id == req.params.id);
+        res.render("products/edit", { prodFound });
+
+    },
+    update: (req, res) => {
+        let products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
+
+        const {
+            name,
+            color,
+            decorado,
+            color_decorado,
+            image,
+            price,
+          } = req.body;
+
+        let prodFound  = products.find((prod) => prod.id == req.params.id);
+
+        prodFound.name = name || prodFound.name;
+
+        prodFound.color = color || prodFound.color;
+
+        prodFound.price = price || prodFound.price;
+
+        prod.found.decorado = decorado || prodFound.decorado;
+
+        prodFound.color_decorado = color_decorado || prodFound.color_decorado;
+
+        prodFound.image = req.file?.filename || prodFound.image;
+
+        fs.writeFileSync(productsPath, JSON.stringify(products, null, "  "));
+
+        res.redirect("/");
+
 
     },
     destroy: (req,res) =>{
@@ -49,6 +100,11 @@ module.exports = {
         //actualizar el listado de produtos
         products = products.filter((prod)=>prod.id !=req.params.id)
 
+        // sobreescribir json
+    fs.writeFileSync(productsPath, JSON.stringify(products, null, "  "));
+
+     // Redireccionar
+     res.redirect("/");
     }
 
 }
