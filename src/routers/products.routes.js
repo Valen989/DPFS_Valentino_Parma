@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {detail, create, list, destroy, edit, } = require("../controllers/products.controllers")
+const {detail, create, list, destroy, edit, add} = require("../controllers/products.controllers")
 
 
 
@@ -12,5 +12,10 @@ router.get("/:id",detail)
 //router.get("/create")
 //proceso de creacion  
 //router.post("/create")
+router.get("/",list)
+
+router.get("/create",create)
+
+router.post("/create",add)
 
 module.exports = router;

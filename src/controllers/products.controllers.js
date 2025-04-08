@@ -14,7 +14,11 @@ module.exports = {
             res.render("products/detail",{prodFound })
         }
     },
-    create: (req,res) =>{
+    create:(req,res) =>{
+        res.render("products/create")
+
+    },
+    add: (req,res) =>{
         const products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
 
         const {
