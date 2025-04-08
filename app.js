@@ -6,15 +6,27 @@ const path = require ('path')
 
 const PORT = 3030
 
+const indexRoutes = require("./src/routers/index.routes")
+
+const productsRoutes = require("./src/routers/products.routes")
+
+
+
 app.set('view engine','ejs');
-app.set('views',path.join(__dirname, 'views'));
+app.set('views',path.join(__dirname,"src", 'views'));
+
+//para que nuestra app entienda lo que viene de los formularios
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(express.static(path.join(__dirname,"src","public")))
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,"src", 'public')));
 
-app.get('/',(req,res) => {
-    res.render('home')
-})
+app.use("/",indexRoutes)
+
+app.use("/productos",productsRoutes)
+
 
 app.get('/cart',(req,res) => {
     res.sendFile(path.join(__dirname,'./views/cart.html'))
