@@ -8,9 +8,23 @@
 <main>
 <!--Logo tienda de bordado-->
 <div>
-  <img src="/images/logo_tienda_de_bordado.jpg" alt="Tienda de Bordado" />
+
   
   </div>
+  <div class="contenedor">
+    <% products.forEach(products => { %>
+      <a href="/productos/detalle/<%= products.id %>">
+        <img src="/images/productos_ejemplos/imagen_1.jpg" alt="imagen de ejemplo" />
+        <h2><%= products.title %></h2>
+        <p><%= products.decorated %></p>
+        <p><%= products.colorDecorated %></p>
+        <p><%= products.price %></p>
+
+
+      </a>
+      <% }); %>
+  </div>
+
 </main>
   </body>
 </html>

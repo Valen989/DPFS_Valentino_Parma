@@ -1,8 +1,23 @@
 <html lang="es">
-  <%- include('./head' ) %>
+  <%- include('../partials/head' ) %>
   <body>
     <!--Cabezera-->
-    <%- include('./header') %>
+    <%- include('../partials/header') %>
 <main>
-    detail
+    <div>
+      
+        <img src="/images/productos_ejemplos/imagen_1.jpg" alt="imagen de ejemplo" />
+        <h2><%= prodFound.title %></h2>
+        <p><%= prodFound.decorated %></p>
+        <p><%= prodFound.colorDecorated %></p>
+        <p><%= prodFound.price %></p>
+
+        <form
+        action="/productos/delete/<%= prodFound.id %>?_method=DELETE"
+        method="post"
+      >
+        <button class="btn btn__delete" href="">Eliminar</button>
+      </form>
+      
+    </div>
 </main>

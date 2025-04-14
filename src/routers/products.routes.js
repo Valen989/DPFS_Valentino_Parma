@@ -6,16 +6,16 @@ const {detail, create, list, destroy, edit, add,update} = require("../controller
 
 const router = express.Router();
 
-//vista de detalle del producto dinamica
-router.get("/:id",detail)
+
+router.get("/detalle/:id",detail)
 
 router.get("/",list)
 
-router.get("/create",create)
+router.get("/crear",create)
 
-router.post("/create",add)
+router.post("/crear",add)
 
-router.get("/:id/edit",edit)
+router.get("/edit/:id",edit)
 
 router.put("/edit/:id", update);
 

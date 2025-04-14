@@ -6,83 +6,78 @@ const productsPath = path.join(__dirname,"..","data", "products.json")
 
 module.exports = {
     detail: (req,res) =>{
-        const products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
+        let products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
 
-        const prodFound = products.find((product)=>product.id == req.params.id)
+        let prodFound = products.find((product)=>product.id == req.params.id)
         
-        if (prodFound) {
-            res.render("products/detail",{prodFound})
-        }
+        res.render("products/detail",{prodFound})
     },
     create:(req,res) =>{
         res.render("products/create")
 
     },
     add: (req,res) =>{
-        const products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
+        let products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
 
-        const {
-            name,
-            color,
-            decorado,
-            color_decorado,
-            iamge,
-            price,
-
-        } = req.body
 
         let newProduct = {
-        id: products[products.length - 1].id +1 ,
-        name,
-        color,
-        decorado,
-        color_decorado ,
-        image ,
-        price,
+        id: products.length +1 ,
+        title : req.body.title,
+        color: req.body.color,
+        decorated: req.body.decorated,
+        colorDecorated: req.body.colorDecorated,
+        price: req.body.price,
+    
+        };
+        products.push(newProduct);
 
-        }
-        products.push(newProduct)
-
-        fs.writeFileSync(productsPath,JSON.stringify(products, null, " "))
+        fs.writeFileSync(productsPath,JSON.stringify(products, null, " "));
 
         res.redirect("/")
+        console.log(newProduct);
+        
     },  
     list : (req,res) =>{
-        const products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
+        let products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
         
          res.render('products',{products});
     },
     edit: (req, res) => {
-        let products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
-        let prodFound = products.find((prod) => prod.id == req.params.id);
-        res.render("products/edit", { prodFound });
+        let products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
+
+        let prodFound = products.find((prod)=>prod.id == req.params.id)
+        
+        res.render("products/edit",{prodFound})
 
     },
     update: (req, res) => {
         let products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
 
         const {
-            name,
+            title,
             color,
-            decorado,
-            color_decorado,
-            image,
+            decorated,
+            colorDecorated,
+            images,
             price,
           } = req.body;
 
         let prodFound  = products.find((prod) => prod.id == req.params.id);
 
-        prodFound.name = name || prodFound.name;
+        prodFound.title = title || prodFound.title;
 
         prodFound.color = color || prodFound.color;
 
         prodFound.price = price || prodFound.price;
 
-        prod.found.decorado = decorado || prodFound.decorado;
+        prodFound.decorated = decorated || prodFound.decorated;
 
-        prodFound.color_decorado = color_decorado || prodFound.color_decorado;
+        prodFound.color_decorated = colorDecorated || prodFound.colorDecorated;
 
-        prodFound.image = req.file?.filename || prodFound.image;
+        
+        
+
+        // prodFound.images = req.file?.filename || prodFound.images;
 
         fs.writeFileSync(productsPath, JSON.stringify(products, null, "  "));
 
@@ -95,6 +90,7 @@ module.exports = {
         let products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
         //eliminar imagen
         let productToDelete = products.find((prod)=>prod.id==req.params.id)
+       /*
         if (productToDelete.image != "default.png") {
             fs.unlinkSync(
                 path.join(
@@ -102,7 +98,7 @@ module.exports = {
                     "../public/images/products"+productToDelete.image,
                 )
             )
-        }
+        }*/
         //actualizar el listado de produtos
         products = products.filter((prod)=>prod.id !=req.params.id)
 
