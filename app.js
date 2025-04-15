@@ -8,18 +8,32 @@ const path = require ('path')
 
 const PORT = 3030
 
+const session = require("express-session");
+
+const userLogged = require("./middlewares/userLogged");
+
 const indexRoutes = require("./src/routers/index.routes")
 
 const productsRoutes = require("./src/routers/products.routes")
+
+// Session
+app.use(
+    session({ secret: "EstoEsunSecreto", saveUninitialized: true, resave: true })
+);
+
 
 
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,"src", 'views'));
 
-//para que nuestra app entienda lo que viene de los formularios
+
+
+app.use(userLogged);
 
 app.use(express.static(path.join(__dirname,"src","public")));
+
+//para que nuestra app entienda lo que viene de los formularios
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
