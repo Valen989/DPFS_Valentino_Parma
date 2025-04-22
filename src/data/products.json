@@ -1,19 +1,11 @@
 [
-  {
-    "id": 3,
-    "title": "bolso",
-    "color": "naranja",
-    "decorated": "escudo de estudiantes",
-    "colorDecorated": "Violeta",
-    "price": "250"
-  },
-  {
-    "id": 4,
-    "title": "almohadon",
-    "color": "gris",
-    "decorated": "flores",
-    "colorDecorated": "fucsia",
-    "price": "2222",
-    "color_decorated": "rojo"
-  }
+ {
+  "id": 1,
+  "title": "almohadon",
+  "color": "azul",
+  "decorated": "carpincho con nombre",
+  "colorDecorated": "marron",
+  "price": "123",
+  "image": "prod-1744949729078.jpg"
+ }
 ]

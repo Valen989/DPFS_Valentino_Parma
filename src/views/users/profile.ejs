@@ -1,0 +1,15 @@
+<html lang="es">
+  <%- include('../partials/head' ), {
+    title : "profile"
+}%>
+<main>
+    <main class="container">
+        <h1>Vista de perfil de: <%= user.name %></h1>
+        <img
+          width="250px"
+          src="/images/users/<%= user.avatar %>"
+          alt="Avatar de <%= user.name %>"
+        />
+        <p><%= user.email %></p>
+      </main>   
+</main>

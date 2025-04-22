@@ -5,19 +5,22 @@
     <%- include('../partials/header') %>
 <main>
     <div>
-      
-        <img src="/images/productos_ejemplos/imagen_1.jpg" alt="imagen de ejemplo" />
+      <main>
+      <img src="/images/products/<%= prodFound.image %>" alt="<%= prodFound.name %>"/>
         <h2><%= prodFound.title %></h2>
         <p><%= prodFound.decorated %></p>
         <p><%= prodFound.colorDecorated %></p>
         <p><%= prodFound.price %></p>
 
-        <form
-        action="/productos/delete/<%= prodFound.id %>?_method=DELETE"
-        method="post"
-      >
-        <button class="btn btn__delete" href="">Eliminar</button>
-      </form>
+        <% if (locals.isAdmin) { %>
+        <form action="/productos/delete/<%= prodFound.id %>?_method=DELETE" method="post">
       
+        <button class="btn btn__delete" href="">Eliminar</button>
+        </form>
+      </main>
+      <% } else { %>
+        <main>
+        <p>Solo los administradores pueden eliminar productos.</p>
+      </main>
+      <% }  %>
     </div>
-</main>

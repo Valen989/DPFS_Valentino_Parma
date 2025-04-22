@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const usersPath = path.join(__dirname, "../data/users.json");
+const usersPath = path.join(__dirname,"..","data", "users.json");
 
 function userLogged(req, res, next) {
   // res.locals.isAdmin = false;
@@ -10,7 +10,7 @@ function userLogged(req, res, next) {
     res.locals.isLogged = true;
     res.locals.userLogged = req.session.userLogged;
 
-    req.session?.userLogged.role == "admin"
+    req.session?.userLogged.category == "admin"
       ? (res.locals.isAdmin = true)
       : null;
   }
@@ -23,7 +23,7 @@ function userLogged(req, res, next) {
       req.session.userLogged = userToLogin;
       res.locals.isLogged = true;
       res.locals.userLogged = req.session.userLogged;
-      req.session?.userLogged.role == "admin"
+      req.session?.userLogged.category == "admin"
         ? (res.locals.isAdmin = true)
         : null;
     }

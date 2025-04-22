@@ -20,14 +20,22 @@ module.exports = {
         let products = JSON.parse(fs.readFileSync(productsPath,"utf-8"))
 
 
+        const {
+            title,
+            color,
+            decorated,
+            colorDecorated,
+            price,
+        } = req.body
+
         let newProduct = {
         id: products.length +1 ,
-        title : req.body.title,
-        color: req.body.color,
-        decorated: req.body.decorated,
-        colorDecorated: req.body.colorDecorated,
-        price: req.body.price,
-    
+        title,
+        color,
+        decorated,
+        colorDecorated,
+        price,
+        image: req.file.filename || "imagen_1.jpg"
         };
         products.push(newProduct);
 
@@ -74,10 +82,12 @@ module.exports = {
 
         prodFound.color_decorated = colorDecorated || prodFound.colorDecorated;
 
+        prodFound.images = req.file.filename || prodFound.images;
+
         
         
 
-        // prodFound.images = req.file?.filename || prodFound.images;
+        
 
         fs.writeFileSync(productsPath, JSON.stringify(products, null, "  "));
 
