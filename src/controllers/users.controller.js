@@ -4,6 +4,10 @@ const fs = require("fs");
 const { validationResult } = require("express-validator");  
 const usersPath = path.join(__dirname, "../data/users.json");
 
+const User = require("../services/users");
+
+const db = require("../../database/models");
+
 module.exports = {
   login: (req, res) => {
     res.render("users/login");
@@ -12,77 +16,88 @@ module.exports = {
   register: (req, res) => {
     res.render("users/register");
   },
-  processRegister: (req, res) => {
-    let users = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
-    const { firstName, lastName,email, password,category } = req.body;
-    console.log(req.file);
+  processRegister: async (req, res) => {
+   //*ok
+   try {
+    const { name, surname,email, password,category } = req.body;
 
+    console.log(req.file);
     let newUser = {
-      id: users.length + 1,
-      firstName,
-      lastName,
+      name,
+      surname,
       email,
       password: bcryptjs.hashSync(password, 10),
       category,
       avatar: req.file?.filename || "default.png",
     };
-    users.push(newUser);
-
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, "  "));
+    await db.User.create(newUser);
     res.redirect("/");
-  },
-  processLogin: (req, res) => {
-    const resultValidation = validationResult(req);
-    // console.log(resultValidation.mapped());
-
-    if (resultValidation.isEmpty()) {
-      // Verificar que el mail exista
-      let userToLogin = User.findByField("email", req.body.email);
-    if (userToLogin) {
-      // Comparar contraseñas
-      let passOk = bcryptjs.compareSync(
-        req.body.password,
-        userToLogin.password
-      );
-      if (passOk) {
-        // borrar password previo a la creacion de la sesion
-        delete userToLogin.password;
-        // Generar una sesion
-        req.session.userLogged = userToLogin;
-        // Recordar usuario
-        if (req.body.rememberme == "on") {
-          res.cookie("email", userToLogin.email, { maxAge: 60 * 1000 * 60 });
-        }
-        // Redireccione a la vista de perfil
-        res.redirect("/users/profile");
-      }
-      console.log("Las credenciales son incorrectas");
-      return res.redirect("/users/login", {
-    errors: {
-      password: {
-        msg: "Credenciales inválidas PASSWORD",
-      },
-    },
-    old: req.body,
-  });
-} else {
-  // Si el email no lo encuentra
-  return res.render("users/login", {
-  errors: {
-    password: {
-      msg: "Credenciales inválidas",
-    },
-    old: req.body,
-  },
-});
-    }
-  }else {
-    return res.render("users/login", {
-      errors: resultValidation.mapped(),
-      old: req.body,
-    });
+  } catch (error) {
+    console.log(error);
   }
 },
+  processLogin:async (req, res) => {
+    //* Ok
+    try {
+      const resultValidation = validationResult(req);
+      // console.log(resultValidation.mapped());
+
+      if (resultValidation.isEmpty()) {
+        // Verificar que el mail exista
+        let userToLogin = await db.User.findOne({
+          where: {
+            email: req.body.email,
+          },
+        });
+        if (userToLogin) {
+          // Comparar contraseñas
+          let passOk = bcryptjs.compareSync(
+            req.body.password,
+            userToLogin.password
+          );
+          if (passOk) {
+            // borrar password previo a la creacion de la sesion
+            delete userToLogin.password;
+            // Generar una sesion
+            req.session.userLogged = userToLogin;
+            // Recordar usuario
+            if (req.body.rememberme == "on") {
+              res.cookie("email", userToLogin.email, {
+                maxAge: 60 * 1000 * 60,
+              });
+            }
+            // Redireccione a la vista de perfil
+            return res.redirect("/users/profile");
+          }
+          return res.render("users/login", {
+            errors: {
+              password: {
+                msg: "Credenciales inválidas PASSWORD",
+              },
+            },
+            old: req.body,
+          });
+        } else {
+          // Si el email no lo encuentra
+          return res.render("users/login", {
+            errors: {
+              password: {
+                msg: "Credenciales inválidas",
+              },
+              old: req.body,
+            },
+          });
+        }
+      } else {
+        return res.render("users/login", {
+          errors: resultValidation.mapped(),
+          old: req.body,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
   profile: (req, res) => {
      console.log(req.session.userLogged);
     res.render("users/profile", { user: req.session.userLogged });

@@ -14,6 +14,7 @@ const userLogged = require("./src/middlewares/userLogged");
 
 const PORT = 3030
 
+const db = require("./database/models");
 
 
 app.set('view engine','ejs');
@@ -42,7 +43,8 @@ const usersRoutes = require("./src/routers/users.routes")
 
 const indexRoutes = require("./src/routers/index.routes")
 
-const productsRoutes = require("./src/routers/products.routes")
+const productsRoutes = require("./src/routers/products.routes");
+const { Sequelize } = require('sequelize');
 
 
 app.use("/",indexRoutes);
@@ -57,5 +59,11 @@ app.use(function (req, res) {
   });
 
 
-app.listen(3030,() =>
-console.log('servidor corriendo en http://localhost:' + PORT))
+app.listen(3030,async() =>{
+
+
+await db.sequelize.sync({ force: true });
+console.log("All models were synchronized successfully.");
+
+
+console.log('servidor corriendo en http://localhost:' + PORT)})
