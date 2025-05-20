@@ -1,0 +1,83 @@
+*{
+    background-color: rgba(241, 237, 221);
+}
+
+
+.logo-tienda{
+    justify-content: center;
+}
+
+.logo-tienda img{
+    justify-content: center;
+    width: 20%;
+    margin-left: 40%;
+}
+
+/*
+.carrusel-container{
+   display: flex; 
+   height: 90%;
+}
+
+.carrusel {
+    display: flex;
+    justify-content: center;
+    height: 90%;
+    
+}
+
+.carrusel img{
+
+
+}
+*/
+.carrusel-container {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    position: relative;
+}
+
+.carrusel {
+    display: flex;
+    overflow: hidden;
+    height: 90%;
+}
+
+.grupo {
+    display: none; /* Oculta todos los grupos por defecto */
+    flex-shrink: 0;
+    justify-content: center;
+    width: 100%; 
+    opacity: 0; 
+    transform: scale(0.9); 
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.grupo img {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Agrega sombra sutil */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.grupo.activo {
+    display: flex; /* Solo el grupo activo será visible */
+    opacity: 1; 
+    transform: scale(1);
+}
+
+.grupo.activo img {
+    width: 90%;
+}
+
+
+.productos-destacados img{
+    width: 20%;
+    height: 20%;
+}
+
+
+.redes-sociales{
+    justify-content: center;
+    
+}

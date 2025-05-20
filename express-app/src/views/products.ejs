@@ -1,0 +1,33 @@
+<html lang="es">
+  <%- include('./partials/head' ), {
+    title : "productos"
+}%>
+  <body>
+<!--Cabezera-->
+<%- include('./partials/header') %>
+<main>
+<!--Logo tienda de bordado-->
+<div>
+
+  
+  </div>
+  <div class="contenedor">
+    <% products.forEach(products => { %>
+      <a href="/productos/detalle/<%= products.id %>">
+        <img src="/images/products/<%= products.image %>" alt="<%= products.name %>"/>
+        <h2><%= products.title %></h2>
+        <p><%= products.embroidery %></p>
+        <p><%= products.embroideryColor %></p>
+        <p><%= products.size %></p>
+        <p><%= products.price %></p>
+
+
+       
+
+      </a>
+      <% }); %>
+  </div>
+
+</main>
+  </body>
+</html>

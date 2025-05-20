@@ -1,0 +1,67 @@
+<html lang="es">
+  <%- include('./partials/head' ), {
+    title : "Home"
+}%>
+  <body>
+    <!--Cabezera-->
+    <%- include('./partials/header') %>
+<main>
+<!--Logo tienda de bordado-->
+<div class="logo-tienda">
+
+<img src="/images/logo_tienda_de_bordado.png" alt="Tienda de Bordado" />
+
+</div>
+<!--carrusel de productos-->
+<div class="carrusel-container">
+    <button id="prevBtn">❮</button>
+    <div class="carrusel">
+      <div class="grupo">
+        <img src="/images/products/imagen_1.jpg" />
+        <img src="/images/products/imagen_2.jpg" />
+        <img src="/images/products/imagen_3.jpg" />
+        </div>
+        <div class="grupo">
+        <img src="/images/products/imagen_4.jpg" />
+        <img src="/images/products/imagen_5.jpg" />
+        <img src="/images/products/imagen_6.png" />
+        </div>
+        <div class="grupo">
+        <img src="/images/products/imagen_7.png" />
+        <img src="/images/products/imagen_8.png" />
+        <img src="/images/products/imagen_9.png" />
+        </div>
+    </div>
+    <button id="nextBtn">❯</button>
+</div>
+
+<!--Productos destacados-->
+<h2>Destacados</h2>
+<div class="productos-destacados">
+  <img src="/images/productos_ejemplos/imagen_1.jpg" />
+  
+  <img src="/images/productos_ejemplos/imagen_2.jpg" />
+  <img src="/images/productos_ejemplos/imagen_3.jpg" />
+  <img src="/images/productos_ejemplos/imagen_4.jpg" />
+  <img src="/images/productos_ejemplos/imagen_5.jpg" />
+  
+</div>
+<a href="/productos">Ver todos los productos</a>
+
+
+</main>
+<footer>
+<!--Redes sociales-->
+<div class="redes-sociales">
+<h2>Seguinos!!</h2>
+<h3>logo facebook</h3>
+<h3>logo instagram</h3>
+</div>
+<!--metodos de pago-->
+<h2>Metodos de pago</h2>
+
+<script src="/js/front-functions/carrusel.js"></script>
+</footer>
+  </body>
+</html>
+
