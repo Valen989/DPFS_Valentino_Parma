@@ -17,10 +17,13 @@
       
         <button class="btn btn__delete" href="">Eliminar</button>
         </form>
+        <a class="btn btn__update" href="/products/edit/<%= prodFound.id %>"
+          >Editar producto</a
+        >
+        </form>
       </main>
       <% } else { %>
         <main>
-        <p>Solo los administradores pueden eliminar productos.</p>
       </main>
       <% }  %>
     </div>

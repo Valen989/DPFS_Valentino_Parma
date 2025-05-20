@@ -69,6 +69,15 @@ app.listen(3030,async() =>{
 /*
 await db.sequelize.sync({ force: true });
 console.log("All models were synchronized successfully.");*/
+const sequelize = new Sequelize('valen98_tiendadebordadodb', 'valen98', 'Catequesis23', {
+  host: 'mysql-valen98.alwaysdata.net', // Reemplaza con el host de Alwaysdata
+  dialect: 'mysql',
+});
 
+sequelize.authenticate()
+  .then(() => console.log('Conexión exitosa con la base de datos'))
+  .catch(err => console.error('Error al conectar:', err));
+  
+await db.sequelize.sync({ force: true });
 
 console.log('servidor corriendo en http://localhost:' + PORT)})

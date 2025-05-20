@@ -75,8 +75,8 @@ module.exports = {
         const {
             title,
             color,
-            decorated,
-            colorDecorated,
+            embroidery,
+            embroideryColor,
             size,
             images,
             price,
@@ -91,11 +91,11 @@ module.exports = {
 
         price : price || prodFound.price,
 
-        decorated : decorated || prodFound.decorated,
+        embroidery : embroidery || prodFound.embroidery,
 
         size: size || prodFound.size,
 
-        color_decorated : colorDecorated || prodFound.colorDecorated,
+        embroideryColor : embroideryColor || prodFound.embroideryColor,
 
         images : req.file.filename || prodFound.images,
 
