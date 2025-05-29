@@ -4,9 +4,9 @@ const db = require("../../../database/models");
 module.exports = {
   getProducts: async (req, res) => {
     let products = await db.Product.findAll({
-      include: ["category", "size", "filament"],
+      include: ["title", "size", "filament"],
       attributes: {
-        exclude: ["size_id", "filament_id", "category_id"],
+        exclude: ["size_id", "filament_id", "title_id"],
         include: [
           [
             db.sequelize.literal(
@@ -25,31 +25,31 @@ module.exports = {
       // raw: true,
     });
 
-    let countByCategory = await db.Product.findAll({
+    let countByTitle = await db.Product.findAll({
       attributes: [
-        "category_id",
+        "title",
         [db.sequelize.fn("COUNT", db.sequelize.col("Product.id")), "count"],
       ],
       include: [
         {
-          model: db.Category,
-          as: "category",
+          model: db.title,
+          as: "title",
           attributes: ["name"],
         },
       ],
-      group: ["category_id", "category.id"],
+      group: ["title_id", "title.id"],
       raw: true,
     });
 
     // Transformar a objeto
     let countObject = {};
-    countByCategory.forEach((item) => {
-      countObject[item["category.name"]] = parseInt(item.count);
+    countByTitle.forEach((item) => {
+      countObject[item["title.name"]] = parseInt(item.count);
     });
 
     res.json({
       count: products.length,
-      countByCategory: countObject,
+      countByTitle: countObject,
       products: products,
     });
   },
@@ -57,9 +57,9 @@ module.exports = {
     try {
       // Paso 1
       let prodFound = await db.Product.findByPk(req.params.id, {
-        include: ["category", "size", "filament"],
+        include: ["title", "size", "filament"],
         attributes: {
-          exclude: ["size_id", "filament_id", "category_id"],
+          exclude: ["size_id", "filament_id", "title_id"],
         },
       });
       // Paso 2
@@ -72,9 +72,9 @@ module.exports = {
     try {
       // Paso 1
       let prodFound = await db.Product.findOne({
-        include: ["category", "size", "filament"],
+        include: ["title", "size", "filament"],
         attributes: {
-          exclude: ["size_id", "filament_id", "category_id"],
+          exclude: ["size_id", "filament_id", "title_id"],
         },
         order: [["id", "DESC"]],
       });
