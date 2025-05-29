@@ -65,6 +65,14 @@ app.use("/productos",productsRoutes);
 app.use("/users",usersRoutes)
 
 
+
+//routes de la api 
+
+app.use("/api/users", usersApiRoutes);
+app.use("/api/products", productsApiRoutes);
+app.use("/api/categories", categoriesApiRoutes);
+
+
 app.use(function (req, res) {
     res.status(404).render("not-found.ejs", { title: "No encontrado" });
   });

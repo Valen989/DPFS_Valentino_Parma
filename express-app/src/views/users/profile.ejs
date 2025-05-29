@@ -1,7 +1,6 @@
 <html lang="es">
-  <%- include('../partials/head' ), {
-    title : "profile"
-}%>
+  <!-- Head -->
+  <%- include('../partials/head.ejs',{style:"usersProfile"}) %>
 <main>
     <main class="container">
         <h1>Vista de perfil de: <%= user.name %></h1>

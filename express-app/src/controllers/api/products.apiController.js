@@ -1,5 +1,5 @@
 const { where } = require("sequelize");
-const db = require("../../database/models");
+const db = require("../../../database/models");
 
 module.exports = {
   getProducts: async (req, res) => {
