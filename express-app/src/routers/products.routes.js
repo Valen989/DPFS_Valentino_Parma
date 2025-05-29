@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {detail, create, list, destroy, edit, add,update} = require("../controllers/products.controllers")
+const {detail, create, list, destroy, edit, add,update} = require("../controllers/products.controller")
 
 const { uploadProd } = require("../middlewares/multer");
 

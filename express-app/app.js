@@ -51,7 +51,13 @@ const indexRoutes = require("./src/routers/index.routes")
 const productsRoutes = require("./src/routers/products.routes");
 const { Sequelize } = require('sequelize');
 
+// api routes
+const usersApiRoutes = require("./src/routers/api/users.apiRoutes");
+const productsApiRoutes = require("./src/routers/api/products.apiRoutes");
+const categoriesApiRoutes = require("./src/routers/api/categories.apiRoutes");
 
+
+//routes de la pagina
 app.use("/",indexRoutes);
 
 app.use("/productos",productsRoutes);
@@ -62,6 +68,10 @@ app.use("/users",usersRoutes)
 app.use(function (req, res) {
     res.status(404).render("not-found.ejs", { title: "No encontrado" });
   });
+
+
+
+
 
 
 app.listen(3030,async() =>{

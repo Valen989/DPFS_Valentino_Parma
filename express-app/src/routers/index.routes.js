@@ -1,9 +1,9 @@
 const express = require('express');
 
-const {home} = require("../controllers/index.controllers");
+const {home} = require("../controllers/index.controller");
 
 
-// const indexController = require("../controllers/index.controllers");
+// const indexController = require("../controller/index.controller");
 
 const router = express.Router();
 
