@@ -4,16 +4,13 @@ const router = express.Router();
 const {
   detail,
   getProducts,
-  lastProduct,
 } = require("../../controllers/api/products.apiController");
 
 // Endpoint de productos
 router.get("/", getProducts);
 
 // Endpoint de detalle de un producto
-router.get("/detail/:id", detail);
+router.get("/:id", detail);
 
-// Endpoint de detalle de un producto
-router.get("/last-product", lastProduct);
 
 module.exports = router;

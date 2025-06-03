@@ -52,9 +52,9 @@ module.exports = {
       const user = await db.User.findByPk(req.params.id, {
         attributes: {
           exclude: ["password"],
-          //! include: [
-          //! ["http://localhost:4000/images/users/default.png", "urlAvatar"],
-          //! ["http://localhost:4000/api/users/","url"]]
+       //    include: [
+         //  ["http://localhost:3030/images/logo_tienda_de_bordado.png", "urlAvatar"],
+        //   ["http://localhost:3030/api/users/","url"]]
         },
       });
       res.json(user);

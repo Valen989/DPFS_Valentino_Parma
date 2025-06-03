@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
-    "username": "valen98",
-    "password": "Catequesis23",
-    "database": "valen98_tiendadebordadodb",
-    "host": "mysql-valen98.alwaysdata.net",
+    "username": "root",
+    "password": null,
+    "database": "tiendadebordado_db",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {

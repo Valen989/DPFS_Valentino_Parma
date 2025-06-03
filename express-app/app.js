@@ -54,7 +54,7 @@ const { Sequelize } = require('sequelize');
 // api routes
 const usersApiRoutes = require("./src/routers/api/users.apiRoutes");
 const productsApiRoutes = require("./src/routers/api/products.apiRoutes");
-const categoriesApiRoutes = require("./src/routers/api/categories.apiRoutes");
+
 
 
 //routes de la pagina
@@ -70,7 +70,7 @@ app.use("/users",usersRoutes)
 
 app.use("/api/users", usersApiRoutes);
 app.use("/api/products", productsApiRoutes);
-app.use("/api/categories", categoriesApiRoutes);
+
 
 
 app.use(function (req, res) {
@@ -84,9 +84,10 @@ app.use(function (req, res) {
 
 app.listen(3030,async() =>{
 
+
+// await db.sequelize.sync({ force: true });
+console.log("All models were synchronized successfully.");
 /*
-await db.sequelize.sync({ force: true });
-console.log("All models were synchronized successfully.");*/
 const sequelize = new Sequelize('valen98_tiendadebordadodb', 'valen98', 'Catequesis23', {
   host: 'mysql-valen98.alwaysdata.net', // Reemplaza con el host de Alwaysdata
   dialect: 'mysql',
@@ -95,7 +96,7 @@ const sequelize = new Sequelize('valen98_tiendadebordadodb', 'valen98', 'Cateque
 sequelize.authenticate()
   .then(() => console.log('Conexión exitosa con la base de datos'))
   .catch(err => console.error('Error al conectar:', err));
-  
-await db.sequelize.sync({ force: true });
 
+await db.sequelize.sync({ force: true });
+*/
 console.log('servidor corriendo en http://localhost:' + PORT)})

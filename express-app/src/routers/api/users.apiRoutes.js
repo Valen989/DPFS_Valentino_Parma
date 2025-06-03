@@ -9,6 +9,6 @@ const router = express.Router();
 router.get("/", getUsers);
 
 // Endpoint de usuarios
-router.get("/profile/:id", profile);
+router.get("/:id", profile);
 
 module.exports = router;
